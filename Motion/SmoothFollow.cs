@@ -140,6 +140,8 @@ namespace Klak.Motion
 
         void Update()
         {
+            if (!_target) return;
+
             if (_interpolator == Interpolator.Exponential)
             {
                 if (_positionSpeed > 0)
