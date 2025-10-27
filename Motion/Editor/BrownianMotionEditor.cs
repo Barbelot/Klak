@@ -42,6 +42,8 @@ namespace Klak.Motion
         SerializedProperty _rotationScale;
         SerializedProperty _positionFractalLevel;
         SerializedProperty _rotationFractalLevel;
+        SerializedProperty _positionTimeOffset;
+        SerializedProperty _rotationTimeOffset;
 
         static GUIContent _textRandomSeed = new GUIContent("Random Seed");
         static GUIContent _textRandomizeSeed = new GUIContent("Randomize Seed");
@@ -51,6 +53,7 @@ namespace Klak.Motion
         static GUIContent _textAmplitude = new GUIContent("Amplitude");
         static GUIContent _textScale = new GUIContent("Scale");
         static GUIContent _textFractal = new GUIContent("Fractal");
+        static GUIContent _textTimeOffset = new GUIContent("Time Offset");
 
         void OnEnable()
         {
@@ -66,6 +69,8 @@ namespace Klak.Motion
             _rotationScale = serializedObject.FindProperty("_rotationScale");
             _positionFractalLevel = serializedObject.FindProperty("_positionFractalLevel");
             _rotationFractalLevel = serializedObject.FindProperty("_rotationFractalLevel");
+            _positionTimeOffset = serializedObject.FindProperty("_positionTimeOffset");
+            _rotationTimeOffset = serializedObject.FindProperty("_rotationTimeOffset");
         }
 
         public override void OnInspectorGUI()
@@ -88,6 +93,7 @@ namespace Klak.Motion
                 EditorGUILayout.PropertyField(_positionAmplitude, _textAmplitude);
                 EditorGUILayout.PropertyField(_positionScale, _textScale);
                 EditorGUILayout.PropertyField(_positionFractalLevel, _textFractal);
+                EditorGUILayout.PropertyField(_positionTimeOffset, _textTimeOffset);
                 EditorGUI.indentLevel--;
             }
 
@@ -102,6 +108,7 @@ namespace Klak.Motion
                 EditorGUILayout.PropertyField(_rotationAmplitude, _textAmplitude);
                 EditorGUILayout.PropertyField(_rotationScale, _textScale);
                 EditorGUILayout.PropertyField(_rotationFractalLevel, _textFractal);
+                EditorGUILayout.PropertyField(_rotationTimeOffset, _textTimeOffset);
                 EditorGUI.indentLevel--;
             }
 

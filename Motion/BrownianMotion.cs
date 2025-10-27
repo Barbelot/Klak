@@ -49,6 +49,9 @@ namespace Klak.Motion
         [SerializeField, Range(0, 8)] int _positionFractalLevel = 3;
         [SerializeField, Range(0, 8)] int _rotationFractalLevel = 3;
 
+        [SerializeField] float _positionTimeOffset = 0;
+        [SerializeField] float _rotationTimeOffset = 0;
+
         #endregion
 
         #region Public Properties And Methods
@@ -108,6 +111,18 @@ namespace Klak.Motion
             set { _rotationFractalLevel = value; }
         }
 
+        public float positionTimeOffset
+        {
+            get { return _positionTimeOffset; }
+            set { _positionTimeOffset = value; }
+        }
+
+        public float rotationTimeOffset
+        {
+            get { return _rotationTimeOffset; }
+            set { _rotationTimeOffset = value; }
+        }
+
         public void Rehash()
         {
             for (var i = 0; i < 6; i++)
@@ -154,9 +169,9 @@ namespace Klak.Motion
                     _time[i] += _positionFrequency * dt;
 
                 var n = new Vector3(
-                    Perlin.Fbm(_time[0], _positionFractalLevel),
-                    Perlin.Fbm(_time[1], _positionFractalLevel),
-                    Perlin.Fbm(_time[2], _positionFractalLevel));
+                    Perlin.Fbm(_time[0] + _positionTimeOffset, _positionFractalLevel),
+                    Perlin.Fbm(_time[1] + _positionTimeOffset, _positionFractalLevel),
+                    Perlin.Fbm(_time[2] + _positionTimeOffset, _positionFractalLevel));
 
                 n = Vector3.Scale(n, _positionScale);
                 n *= _positionAmplitude * _fbmNorm;
@@ -170,9 +185,9 @@ namespace Klak.Motion
                     _time[i + 3] += _rotationFrequency * dt;
 
                 var n = new Vector3(
-                    Perlin.Fbm(_time[3], _rotationFractalLevel),
-                    Perlin.Fbm(_time[4], _rotationFractalLevel),
-                    Perlin.Fbm(_time[5], _rotationFractalLevel));
+                    Perlin.Fbm(_time[3] + _rotationTimeOffset, _rotationFractalLevel),
+                    Perlin.Fbm(_time[4] + _rotationTimeOffset, _rotationFractalLevel),
+                    Perlin.Fbm(_time[5] + _rotationTimeOffset, _rotationFractalLevel));
 
                 n = Vector3.Scale(n, _rotationScale);
                 n *= _rotationAmplitude * _fbmNorm;
